@@ -73,7 +73,7 @@
     
     // if the object is already of the class or a subclass,
     // nothing has to be done. usualy happens for NSNumber, NSString, NSDictionary etc.
-    if([jsonObject isKindOfClass:klass]) {
+    if([jsonObject.class isSubclassOfClass:klass]) {
         return jsonObject;
     }
     
@@ -105,7 +105,12 @@
             return NSOrderedDescending;
         }
     }];
+    
     for (MYSProperty *property in properties) {
+        if(property.isReadOnly) {
+            continue;
+        }
+        
         Class propertyClass = NSClassFromString(property.type.tag);
         if(!propertyClass) {
             // if the type implements a protocol, strip it, e.g.
