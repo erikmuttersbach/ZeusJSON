@@ -1,0 +1,9 @@
+{
+	"room": {
+		"persons": [{
+			"name": "Foo"
+		}, {
+			"name": "Bar"
+		}]
+	}
+}

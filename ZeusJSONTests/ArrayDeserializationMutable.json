@@ -1,0 +1,11 @@
+{
+	"order": {
+		"numbers": [1, 10],
+		"names": ["hello", "world"],
+		"items": [{
+			"name": "foo"
+		}, {
+			"name": "bar"
+		}]
+	}
+}
