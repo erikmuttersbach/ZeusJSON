@@ -9,7 +9,6 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/erikmuttersbach/ZeusJSON.git", :tag => s.version.to_s }
 
   s.platform     = :ios, '7.0'
-  s.platform 	 = :osx, '10.8'
   s.requires_arc = true
 
   non_arc_files = 'ZeusJSON/NSString+Inflections.{h,m}'
