@@ -86,7 +86,6 @@
     // if no converter was found and the object is a dictionary, deserialize it
     // to a model object
     else if([jsonObject.class isSubclassOfClass:NSDictionary.class]) {
-        DDLogInfo(@"Transformer from %@ to %@ not found", NSStringFromClass(jsonObject.class), NSStringFromClass(klass));
         return [self deserializeDictionary:(NSDictionary*)jsonObject withTargetClass:klass];
     }
     else {
@@ -108,6 +107,19 @@
     }];
     for (MYSProperty *property in properties) {
         Class propertyClass = NSClassFromString(property.type.tag);
+        if(!propertyClass) {
+            // if the type implements a protocol, strip it, e.g.
+            // the tag is then MyModel<MyProtocol>
+            NSArray *components = [property.type.tag componentsSeparatedByString:@"<"];
+            if(components.count) {
+                propertyClass = NSClassFromString(components[0]);
+            }
+        }
+        
+        if(!propertyClass) {
+            DDLogError(@"Could not determine class of property %@", property.name);
+            return nil;
+        }
         
         // check if we are deserializing an embedded or side-loaded
         // property
@@ -119,7 +131,7 @@
             }
         }
         
-        if([property.type.tag isEqualToString:@"NSArray"] || [property.type.tag isEqualToString:@"NSMutableArray"]) {
+        if([propertyClass isSubclassOfClass:NSArray.class]) {
             // make sure that the JSON contains an array of objects
             if(![jsonObject[jsonPropertyName] isKindOfClass:[NSArray class]]) {
                 DDLogError(@"Expected property %@ in JSON to be an array, but is %@", jsonPropertyName, NSStringFromClass([jsonObject[jsonPropertyName] class]));
