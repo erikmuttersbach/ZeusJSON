@@ -89,7 +89,7 @@
         return [self deserializeDictionary:(NSDictionary*)jsonObject withTargetClass:klass];
     }
     else {
-        DDLogError(@"Cannot deserialize %@", jsonObject.className);
+        DDLogError(@"Cannot deserialize %@ for JSON property %@ with target class %@", jsonObject.className, jsonPropertyName, klass);
         return nil;
     }
 }
@@ -149,8 +149,7 @@
             NSObject *value = nil;
             if([self.namingStrategy isIdRefProperty:jsonPropertyName]) {
                 NSNumber *identifier = (NSNumber*)[self.valueTransformer transform:jsonObject[jsonPropertyName] to:NSNumber.class];
-                value = [[propertyClass alloc] init];
-                self.references[REF_KEY(property.type.tag, identifier)] = value;
+                value = [self referencedObjectWithClass:propertyClass andId:identifier];
             } else {
                 value = [self deserialize:jsonObject[jsonPropertyName] JSONProperty:jsonPropertyName withTargetClass:NSClassFromString(property.type.tag)];
             }
@@ -185,6 +184,7 @@
         }
     }
     if(!arrayElementClass) {
+        // TODO enable
         DDLogError(@"Could not determine class for element class of JSON property %@", jsonPropertyName);
         return nil;
     }

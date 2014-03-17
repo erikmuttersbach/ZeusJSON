@@ -28,6 +28,7 @@
 		9CEC233418D3497D00B8BB99 /* NameMatcherTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CEC233318D3497D00B8BB99 /* NameMatcherTest.m */; };
 		9CEC233718D3876600B8BB99 /* ZeusDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CEC233618D3876600B8BB99 /* ZeusDeserializer.m */; };
 		9CEC233A18D3885A00B8BB99 /* ZeusNamingStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CEC233918D3885A00B8BB99 /* ZeusNamingStrategy.m */; };
+		9CFC047018D74A7C00B78046 /* ZeusNamingStrategyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC046F18D74A7C00B78046 /* ZeusNamingStrategyTests.m */; };
 		9CFE5E1418D4B6CA00D9694A /* NSObject+Zeus.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE5E1318D4B6CA00D9694A /* NSObject+Zeus.m */; };
 		F3595133028341AC9699B6E6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB730F636EE14F5EBA5AF453 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -89,6 +90,7 @@
 		9CEC233618D3876600B8BB99 /* ZeusDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZeusDeserializer.m; sourceTree = "<group>"; };
 		9CEC233818D3885A00B8BB99 /* ZeusNamingStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZeusNamingStrategy.h; sourceTree = "<group>"; };
 		9CEC233918D3885A00B8BB99 /* ZeusNamingStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZeusNamingStrategy.m; sourceTree = "<group>"; };
+		9CFC046F18D74A7C00B78046 /* ZeusNamingStrategyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZeusNamingStrategyTests.m; sourceTree = "<group>"; };
 		9CFE5E1118D4B64400D9694A /* ReadMe.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.md; sourceTree = "<group>"; };
 		9CFE5E1218D4B6CA00D9694A /* NSObject+Zeus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Zeus.h"; sourceTree = "<group>"; };
 		9CFE5E1318D4B6CA00D9694A /* NSObject+Zeus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Zeus.m"; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				9C06C71A18D464990010B144 /* ArrayDeserializationMutable.json */,
 				9C06C72218D467050010B144 /* ArrayDeserializationImmutable.json */,
 				9CEC233318D3497D00B8BB99 /* NameMatcherTest.m */,
+				9CFC046F18D74A7C00B78046 /* ZeusNamingStrategyTests.m */,
 			);
 			path = ZeusJSONTests;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				9CB1408E18D59CF300116DE6 /* Big.m in Sources */,
 				9C06C71E18D464D60010B144 /* Order.m in Sources */,
 				9CEC233118D346BD00B8BB99 /* Person.m in Sources */,
+				9CFC047018D74A7C00B78046 /* ZeusNamingStrategyTests.m in Sources */,
 				9CEC233418D3497D00B8BB99 /* NameMatcherTest.m in Sources */,
 				9C06C71918D464780010B144 /* DeserializationTest.m in Sources */,
 				9CEC232D18D346A700B8BB99 /* Room.m in Sources */,

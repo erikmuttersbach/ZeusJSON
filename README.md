@@ -9,7 +9,9 @@ Deserializes complex JSON objects to Objective-C model objects. Supports side-lo
 ## Usage
 
 
+## TODO 
 
+* Could integrate with AFNetworking as deserializer
 	
 
 ## Installation

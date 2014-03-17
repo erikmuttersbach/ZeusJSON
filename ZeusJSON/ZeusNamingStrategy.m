@@ -27,19 +27,19 @@
 
 - (NSString *)JSONIdRefPropertyForProperty:(NSString *)property {
     if(property.isSingular) {
-        return [property stringByAppendingString:@"_id"];
+        return [property.underscore stringByAppendingString:@"_id"];
     } else {
-        return [[property singularize] stringByAppendingString:@"_ids"];
+        return [property.singularize.underscore stringByAppendingString:@"_ids"];
     }
 }
 
 - (NSString *)classForJSONProperty:(NSString *)property {
     if([property hasSuffix:@"_id"]) {
-        return [[property substringToIndex:property.length-3] classify];
+        return [[[property substringToIndex:property.length-3] tableize] classify];
     } else if ([property hasSuffix:@"_ids"]) {
-        return [[property substringToIndex:property.length-4] classify];
+        return [[[property substringToIndex:property.length-4] tableize] classify];
     } else {
-        return [property classify];
+        return [[property tableize] classify];
     }
 }
 
