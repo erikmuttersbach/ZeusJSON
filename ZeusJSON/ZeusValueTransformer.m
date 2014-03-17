@@ -37,6 +37,10 @@
 
 #pragma mark Transformations
 
+- (NSNumber*)__NSNumberFromNSNull:(NSNull*)null {
+    return [[NSNumber alloc] init];
+}
+
 - (NSString*)__NSStringFrom__NSCFString:(NSString*)value {
     return value;
 }

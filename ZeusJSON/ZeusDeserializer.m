@@ -185,7 +185,7 @@
     }
     if(!arrayElementClass) {
         // TODO enable
-        DDLogError(@"Could not determine class for element class of JSON property %@", jsonPropertyName);
+        DDLogError(@"Could not determine class for element of JSON property %@", jsonPropertyName);
         return nil;
     }
     
