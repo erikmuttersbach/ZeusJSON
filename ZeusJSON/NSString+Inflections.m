@@ -359,11 +359,11 @@
 
 
 - (BOOL)isSingular {
-    return [[self singularize] isEqualToString:self];
+    return !self.isPlural;
 }
 
 - (BOOL)isPlural {
-    return !self.isSingular;
+    return [[self pluralize] isEqualToString:self] || [self isEqualToString:@"media"];
 }
 
 @end

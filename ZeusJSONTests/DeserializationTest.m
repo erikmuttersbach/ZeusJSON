@@ -14,6 +14,7 @@
 #import "Item.h"
 #import "Room.h"
 #import "Person.h"
+#import "Primitive.h"
 #import "Big.h"
 
 @interface DeserializationTest : XCTestCase
@@ -97,13 +98,44 @@
 
 - (void) testDeserializeUrl {
     NSDictionary *model = @{@"big": @{
-                                @"url": @"http://example.com"
+                                    @"url": @"http://example.com"
+                                    }
+                            };
+    NSData *json = [NSJSONSerialization dataWithJSONObject:model options:NSJSONWritingPrettyPrinted error:nil];
+    Big *big = (Big*)[ZeusJSON deserializeJSONToObject:json withClass:[Big class]];
+    
+    XCTAssert([big.url.absoluteString isEqualToString:@"http://example.com"]);
+}
+
+- (void) testDeserializeUUID {
+    NSDictionary *model = @{@"big": @{
+                                    @"uuid": @"F7826DA6-4FA2-4E98-8024-BC5B71E0893E"
+                                    }
+                            };
+    NSData *json = [NSJSONSerialization dataWithJSONObject:model options:NSJSONWritingPrettyPrinted error:nil];
+    Big *big = (Big*)[ZeusJSON deserializeJSONToObject:json withClass:[Big class]];
+    
+    XCTAssert([big.uuid.UUIDString isEqualToString:@"F7826DA6-4FA2-4E98-8024-BC5B71E0893E"]);
+}
+
+- (void) testPrimitives {
+    NSDictionary *model = @{@"primitive": @{
+                                @"unsigned_integer": @(22),
+                                @"integer": @(-123),
+                                @"d": @1.234,
+                                @"f": @(-12.12),
+                                @"b": @(true)
                             }
                            };
     NSData *json = [NSJSONSerialization dataWithJSONObject:model options:NSJSONWritingPrettyPrinted error:nil];
-    Big *big = (Big*)[ZeusJSON deserializeJSONToObject:json withClass:[Big class]];
+    NSString *jsonStr = [NSString stringWithCString:json.bytes encoding:NSUTF8StringEncoding];
+    Primitive *primitive = (Primitive*)[ZeusJSON deserializeJSONToObject:json withClass:[Primitive class]];
 
-    XCTAssert([big.url.absoluteString isEqualToString:@"http://example.com"]);
+    XCTAssert(primitive.unsignedInteger == 22);
+    XCTAssert(primitive.integer == -123);
+    XCTAssert(primitive.d == 1.234);
+    XCTAssertEqualWithAccuracy(primitive.f, -12.12, 0.1);
+    XCTAssert(primitive.b == YES);
 }
 
 @end

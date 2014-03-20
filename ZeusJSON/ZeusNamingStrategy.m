@@ -35,12 +35,15 @@
 
 - (NSString *)classForJSONProperty:(NSString *)property {
     if([property hasSuffix:@"_id"]) {
-        return [[[property substringToIndex:property.length-3] tableize] classify];
+        property = [property substringToIndex:property.length-3];
     } else if ([property hasSuffix:@"_ids"]) {
-        return [[[property substringToIndex:property.length-4] tableize] classify];
-    } else {
-        return [[property tableize] classify];
+        property = [property substringToIndex:property.length-4];
     }
+    
+    if(property.isPlural) {
+        property = [property singularize];
+    }
+    return [[property tableize] classify];
 }
 
 - (BOOL) isIdRefProperty:(NSString*)property {

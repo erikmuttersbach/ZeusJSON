@@ -26,7 +26,7 @@
 
 - (BOOL)canTransform:(Class)sourceClass to:(Class)targetClass {
     SEL selector = NSSelectorFromString([NSString stringWithFormat:@"__%@From%@:", targetClass, sourceClass]);
-    //NSLog(@"%@", NSStringFromSelector(selector)); // TODO
+    NSLog(@"%@", NSStringFromSelector(selector)); // TODO
     return [self respondsToSelector:selector];
 }
 
@@ -38,19 +38,27 @@
 #pragma mark Transformations
 
 - (NSNumber*)__NSNumberFromNSNull:(NSNull*)null {
-    return [[NSNumber alloc] init];
-}
-
-- (NSString*)__NSStringFrom__NSCFString:(NSString*)value {
-    return value;
+    return nil;
 }
 
 - (NSNumber*)__NSNumberFrom__NSCFNumber:(NSNumber*)value {
     return value;
 }
 
+- (NSString*)__NSStringFrom__NSCFString:(NSString*)value {
+    return value;
+}
+
+- (NSString*)__NSStringFromNSNull:(NSNull*)null {
+    return nil;
+}
+
 - (NSURL*)__NSURLFrom__NSCFString:(NSString*)value {
     return [NSURL URLWithString:value];
+}
+
+- (NSUUID*)__NSUUIDFrom__NSCFString:(NSString*)value {
+    return [[NSUUID alloc] initWithUUIDString:value];
 }
 
 @end

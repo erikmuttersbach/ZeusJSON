@@ -13,5 +13,6 @@
 @property (nonatomic, strong) NSString *string;
 @property (nonatomic, strong) NSNumber *number;
 @property (nonatomic, strong) NSURL *url;
+@property (nonatomic, strong) NSUUID *uuid;
 
 @end

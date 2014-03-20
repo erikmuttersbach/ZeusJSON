@@ -21,3 +21,10 @@
 - (NSObject*) deserialize;
 
 @end
+
+
+@protocol ZeusModelDeserializationDelegate <NSObject>
+
+- (Class) __classForCollectionProperty:(NSString*)property;
+
+@end

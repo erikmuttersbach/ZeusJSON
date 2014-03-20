@@ -40,9 +40,18 @@
 - (void) testClassForJSONProperty {
     XCTAssertTrue([[self.strategy classForJSONProperty:@"visitor_class_ids"] isEqualToString:@"VisitorClass"]);
     XCTAssertTrue([[self.strategy classForJSONProperty:@"visitor_class_id"] isEqualToString:@"VisitorClass"]);
+    XCTAssertTrue([[self.strategy classForJSONProperty:@"visitor_classes"] isEqualToString:@"VisitorClass"]);
+    XCTAssertTrue([[self.strategy classForJSONProperty:@"visitor_class"] isEqualToString:@"VisitorClass"]);
     
     XCTAssertTrue([[self.strategy classForJSONProperty:@"room_id"] isEqualToString:@"Room"]);
     XCTAssertTrue([[self.strategy classForJSONProperty:@"room_ids"] isEqualToString:@"Room"]);
+    XCTAssertTrue([[self.strategy classForJSONProperty:@"rooms"] isEqualToString:@"Room"]);
+    XCTAssertTrue([[self.strategy classForJSONProperty:@"room"] isEqualToString:@"Room"]);
+    
+    XCTAssertTrue([[self.strategy classForJSONProperty:@"medium_id"] isEqualToString:@"Medium"]);
+    XCTAssertTrue([[self.strategy classForJSONProperty:@"medium_ids"] isEqualToString:@"Medium"]);
+    XCTAssertTrue([[self.strategy classForJSONProperty:@"media"] isEqualToString:@"Medium"]);
+    XCTAssertTrue([[self.strategy classForJSONProperty:@"medium"] isEqualToString:@"Medium"]);
     
 }
 

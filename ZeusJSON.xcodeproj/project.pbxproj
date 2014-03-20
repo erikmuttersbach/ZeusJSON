@@ -14,6 +14,7 @@
 		9C06C72118D465070010B144 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C06C72018D465070010B144 /* Item.m */; };
 		9C06C72318D467050010B144 /* ArrayDeserializationImmutable.json in Resources */ = {isa = PBXBuildFile; fileRef = 9C06C72218D467050010B144 /* ArrayDeserializationImmutable.json */; };
 		9C06C72618D471750010B144 /* ZeusValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C06C72518D471750010B144 /* ZeusValueTransformer.m */; };
+		9CA3506B18DADEE200B04E6B /* Primitive.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA3506A18DADEE200B04E6B /* Primitive.m */; };
 		9CB1408E18D59CF300116DE6 /* Big.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CB1408D18D59CF300116DE6 /* Big.m */; };
 		9CEC22FE18D3453E00B8BB99 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CEC22FD18D3453E00B8BB99 /* Foundation.framework */; };
 		9CEC230318D3453E00B8BB99 /* ZeusJSON.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 9CEC230218D3453E00B8BB99 /* ZeusJSON.h */; };
@@ -69,6 +70,8 @@
 		9C06C72218D467050010B144 /* ArrayDeserializationImmutable.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ArrayDeserializationImmutable.json; sourceTree = "<group>"; };
 		9C06C72418D471750010B144 /* ZeusValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZeusValueTransformer.h; sourceTree = "<group>"; };
 		9C06C72518D471750010B144 /* ZeusValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZeusValueTransformer.m; sourceTree = "<group>"; };
+		9CA3506918DADEE200B04E6B /* Primitive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Primitive.h; sourceTree = "<group>"; };
+		9CA3506A18DADEE200B04E6B /* Primitive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Primitive.m; sourceTree = "<group>"; };
 		9CB1408C18D59CF300116DE6 /* Big.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Big.h; sourceTree = "<group>"; };
 		9CB1408D18D59CF300116DE6 /* Big.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Big.m; sourceTree = "<group>"; };
 		9CEC22FA18D3453E00B8BB99 /* libZeusJSON.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libZeusJSON.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,6 +221,8 @@
 				9C06C72018D465070010B144 /* Item.m */,
 				9CB1408C18D59CF300116DE6 /* Big.h */,
 				9CB1408D18D59CF300116DE6 /* Big.m */,
+				9CA3506918DADEE200B04E6B /* Primitive.h */,
+				9CA3506A18DADEE200B04E6B /* Primitive.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -392,6 +397,7 @@
 				9CEC233418D3497D00B8BB99 /* NameMatcherTest.m in Sources */,
 				9C06C71918D464780010B144 /* DeserializationTest.m in Sources */,
 				9CEC232D18D346A700B8BB99 /* Room.m in Sources */,
+				9CA3506B18DADEE200B04E6B /* Primitive.m in Sources */,
 				9C06C72118D465070010B144 /* Item.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

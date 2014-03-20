@@ -50,7 +50,7 @@
         }
         
         // TODO check if really array
-        [self deserializeArray:self.json[jsonPropertyName] forJSONProperty:jsonPropertyName];
+        [self deserializeArray:self.json[jsonPropertyName] forJSONProperty:jsonPropertyName withElementClass:nil];
         
     }
     
@@ -121,6 +121,23 @@
             }
         }
         
+        // if it is a primitive, use NSNumber for encapsulation
+        if(property.type.type == MYSTypeTypeChar ||
+           property.type.type == MYSTypeTypeBool ||
+           property.type.type == MYSTypeTypeShort ||
+           property.type.type == MYSTypeTypeInt ||
+           property.type.type == MYSTypeTypeLong ||
+           property.type.type == MYSTypeTypeLongLong ||
+           property.type.type == MYSTypeTypeUnsignedChar ||
+           property.type.type == MYSTypeTypeUnsignedShort ||
+           property.type.type == MYSTypeTypeUnsignedInt ||
+           property.type.type == MYSTypeTypeUnsignedLong ||
+           property.type.type == MYSTypeTypeUnsignedLongLong ||
+           property.type.type == MYSTypeTypeFloat ||
+           property.type.type == MYSTypeTypeDouble) {
+            propertyClass = [NSNumber class];
+        }
+        
         if(!propertyClass) {
             DDLogError(@"Could not determine class of property %@", property.name);
             return nil;
@@ -143,7 +160,12 @@
                 continue;
             }
             
-            NSArray *array = [self deserializeArray:(NSArray*)jsonObject[jsonPropertyName] forJSONProperty:jsonPropertyName];
+            Class arrayElementClass = nil;
+            if([obj respondsToSelector:@selector(__classForCollectionProperty:)]) {
+                arrayElementClass = [obj performSelector:@selector(__classForCollectionProperty:) withObject:property.name];
+            }
+            
+            NSArray *array = [self deserializeArray:(NSArray*)jsonObject[jsonPropertyName] forJSONProperty:jsonPropertyName withElementClass:nil];
             [obj setValue:array forKey:property.name];
         } else {
             NSObject *value = nil;
@@ -151,7 +173,7 @@
                 NSNumber *identifier = (NSNumber*)[self.valueTransformer transform:jsonObject[jsonPropertyName] to:NSNumber.class];
                 value = [self referencedObjectWithClass:propertyClass andId:identifier];
             } else {
-                value = [self deserialize:jsonObject[jsonPropertyName] JSONProperty:jsonPropertyName withTargetClass:NSClassFromString(property.type.tag)];
+                value = [self deserialize:jsonObject[jsonPropertyName] JSONProperty:jsonPropertyName withTargetClass:propertyClass];
             }
             
             // if we just encountered an object with an id we'll replace obj
@@ -170,23 +192,25 @@
     return obj;
 }
 
-- (NSArray*)deserializeArray:(NSArray*)jsonArray forJSONProperty:(NSString*)jsonPropertyName {
-    // check if we can find out a target type
-    Class arrayElementClass = NSClassFromString([self.namingStrategy classForJSONProperty:jsonPropertyName]);
+- (NSArray*)deserializeArray:(NSArray*)jsonArray forJSONProperty:(NSString*)jsonPropertyName withElementClass:(Class)arrayElementClass {
+    // check if we can find out a target type if not given
     if(!arrayElementClass) {
-        // guess the type
-        if(jsonArray.count) {
-            if([[jsonArray[0] class] isSubclassOfClass:[NSNumber class]]) {
-                arrayElementClass = [NSNumber class];
-            } else if([[jsonArray[0] class] isSubclassOfClass:[NSString class]]) {
-                arrayElementClass = [NSString class];
+        arrayElementClass = NSClassFromString([self.namingStrategy classForJSONProperty:jsonPropertyName]);
+        if(!arrayElementClass) {
+            // guess the type
+            if(jsonArray.count) {
+                if([[jsonArray[0] class] isSubclassOfClass:[NSNumber class]]) {
+                    arrayElementClass = [NSNumber class];
+                } else if([[jsonArray[0] class] isSubclassOfClass:[NSString class]]) {
+                    arrayElementClass = [NSString class];
+                }
             }
         }
-    }
-    if(!arrayElementClass) {
-        // TODO enable
-        DDLogError(@"Could not determine class for element of JSON property %@", jsonPropertyName);
-        return nil;
+        if(!arrayElementClass) {
+            // TODO enable
+            DDLogError(@"Could not determine class for element of JSON property %@", jsonPropertyName);
+            return nil;
+        }
     }
     
     NSMutableArray *array = [NSMutableArray array];
@@ -210,10 +234,18 @@
 
 - (NSObject*) referencedObjectWithClass:(Class)klass andId:(NSNumber*)identifier {
     NSString *key = REF_KEY(klass, identifier);
-    if(!self.references[key]) {
-        self.references[key] = [[klass alloc] init];
+    NSObject *obj = self.references[key];
+    if(!obj) {
+        obj = [[klass alloc] init];
+        
+        // TODO Could be readonly, check for setID
+        if([obj respondsToSelector:NSSelectorFromString(self.namingStrategy.idProperty)]) {
+            [obj setValue:identifier forKey:self.namingStrategy.idProperty];
+        }
+        
+        self.references[key] = obj;
     }
-    return self.references[key];
+    return obj;
 }
 
 @end
