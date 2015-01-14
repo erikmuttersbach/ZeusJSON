@@ -26,7 +26,7 @@
 
 - (BOOL)canTransform:(Class)sourceClass to:(Class)targetClass {
     SEL selector = NSSelectorFromString([NSString stringWithFormat:@"__%@From%@:", targetClass, sourceClass]);
-    NSLog(@"%@", NSStringFromSelector(selector)); // TODO
+    //NSLog(@"%@", NSStringFromSelector(selector)); // TODO
     return [self respondsToSelector:selector];
 }
 

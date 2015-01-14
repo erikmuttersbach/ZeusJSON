@@ -165,7 +165,7 @@
                 arrayElementClass = [obj performSelector:@selector(__classForCollectionProperty:) withObject:property.name];
             }
             
-            NSArray *array = [self deserializeArray:(NSArray*)jsonObject[jsonPropertyName] forJSONProperty:jsonPropertyName withElementClass:nil];
+            NSArray *array = [self deserializeArray:(NSArray*)jsonObject[jsonPropertyName] forJSONProperty:jsonPropertyName withElementClass:arrayElementClass];
             [obj setValue:array forKey:property.name];
         } else {
             NSObject *value = nil;
