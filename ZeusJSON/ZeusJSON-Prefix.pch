@@ -6,7 +6,8 @@
 
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
+    #import <CocoaLumberjack/CocoaLumberjack.h>
     #import <CocoaLumberjack/DDTTYLogger.h>
 #endif
 
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+static const int ddLogLevel = DDLogLevelVerbose;

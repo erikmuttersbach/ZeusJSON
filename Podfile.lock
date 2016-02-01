@@ -1,26 +1,32 @@
 PODS:
-  - CocoaLumberjack (1.8.1):
-    - CocoaLumberjack/Extensions
-  - CocoaLumberjack/Core (1.8.1)
-  - CocoaLumberjack/Extensions (1.8.1):
+  - CocoaLumberjack (2.2.0):
+    - CocoaLumberjack/Default (= 2.2.0)
+    - CocoaLumberjack/Extensions (= 2.2.0)
+  - CocoaLumberjack/Core (2.2.0)
+  - CocoaLumberjack/Default (2.2.0):
     - CocoaLumberjack/Core
+  - CocoaLumberjack/Extensions (2.2.0):
+    - CocoaLumberjack/Default
   - MYSRuntime (0.0.2)
   - RegexKitLite (4.0)
 
 DEPENDENCIES:
   - CocoaLumberjack
   - MYSRuntime (from `https://github.com/erikmuttersbach/MYSRuntime.git`)
-  - RegexKitLite (from `RegexKitLite.podspec`)
+  - RegexKitLite (~> 4.0)
 
 EXTERNAL SOURCES:
   MYSRuntime:
     :git: https://github.com/erikmuttersbach/MYSRuntime.git
-  RegexKitLite:
-    :path: RegexKitLite.podspec
+
+CHECKOUT OPTIONS:
+  MYSRuntime:
+    :commit: b71f8183f584ca474b27185f6a18ab87ab81c540
+    :git: https://github.com/erikmuttersbach/MYSRuntime.git
 
 SPEC CHECKSUMS:
-  CocoaLumberjack: 020378ec400d658923bf5887178394f65f052c90
-  MYSRuntime: 54beb28afb12699cb549b89d5c6ab7e21425310f
-  RegexKitLite: ccdc7c7feccc0b7aae7f1072c6a068884c0e292d
+  CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
+  MYSRuntime: 2cf67addca346698baf71a51e25a1e75a4f0a7a9
+  RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
 
-COCOAPODS: 0.32.1
+COCOAPODS: 0.39.0
